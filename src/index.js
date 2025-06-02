@@ -3,6 +3,8 @@ import express from 'express';
 import productsRouter from './routers/products.router.js';
 import cartsRouter from './routers/carts.router.js';
 
+const handlebars = require("express-handlebars")
+
 const app = express();
 const PORT = 8080;
 

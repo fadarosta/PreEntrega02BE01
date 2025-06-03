@@ -30,11 +30,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
 app.get('/', (req, res) => {
-  const testUser = {
+  res.render('index', {
     name: 'BackEnd01',
     last_name: '2025'
-  };
-  res.render('index', testUser);
+  });
 });
 
 app.use('/api/products', productRouter);

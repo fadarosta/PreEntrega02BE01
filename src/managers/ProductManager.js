@@ -82,4 +82,4 @@ export default class ProductManager {
     } catch (err) {
       console.error('Error al guardar productos:', err);
     }
-}
+}}

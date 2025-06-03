@@ -1,6 +1,6 @@
 
 import express from 'express';
-import { engine } from 'express-handlebars';
+import handlebars from 'express-handlebars';
 import productRouter from './src/routers/products.router.js';
 import cartRouter from './src/routers/carts.router.js';
 import errorHandler from './middlewares/errorHandler.js';
@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.engine(
   'handlebars',
-  engine({
+  handlebars.engine({
     defaultLayout: 'main',
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
     partialsDir: path.join(__dirname, 'views', 'partials'),
@@ -29,6 +29,9 @@ app.engine(
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/', (req, res) => {
   res.render('index', {
     name: 'BackEnd01',
@@ -38,8 +41,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
-
 app.use(errorHandler);
+
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

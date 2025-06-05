@@ -19,21 +19,18 @@ app.use(express.urlencoded({ extended: true }));
 app.engine(
   'handlebars',
   handlebars.engine({
+    extname: '.handlebars',
     defaultLayout: 'main',
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
     partialsDir: path.join(__dirname, 'views', 'partials'),
-    extname: '.handlebars'
   })
 );
 
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', (req, res) => {
-  res.render('index', {
+  res.render('app', {
     name: 'BackEnd01',
     last_name: '2025'
   });

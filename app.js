@@ -1,5 +1,6 @@
 
 import express from 'express';
+import router from './src/routers/index.js';
 import handlebars from 'express-handlebars';
 import productRouter from './src/routers/products.router.js';
 import cartRouter from './src/routers/carts.router.js';

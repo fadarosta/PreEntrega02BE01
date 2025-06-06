@@ -20,7 +20,6 @@ productsRouter.get('/', (req, res) => {
 productsRouter.get('/:pid', (req, res) => {
   try {
     const pid = Number(req.params.pid)
-
     const index = products.findIndex((_, i) => i + 1 === pid)
 
     if (index === -1) {
@@ -28,6 +27,7 @@ productsRouter.get('/:pid', (req, res) => {
     }
 
     res.json(products[index])
+    
   } catch (err) {
     console.error(`Error GET /api/products/${req.params.pid} →`, err)
     res.status(500).json({ error: 'Error al buscar el producto' })

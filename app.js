@@ -1,10 +1,10 @@
 
 import express from 'express';
-import router from './src/routes/index.js';
+import routes from './src/routes/index.js';
 import handlebars from 'express-handlebars';
 import productRouter from './src/routes/products.router.js';
 import cartRouter from './src/routes/carts.router.js';
-import errorHandler from './middlewares/errorHandler.js';
+import errorHandler from './src/middlewares/errorHandler.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -13,7 +13,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const routers = require("routes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

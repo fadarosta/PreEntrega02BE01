@@ -1,9 +1,9 @@
 
 import express from 'express';
-import router from './src/routers/index.js';
+import router from './src/routes/index.js';
 import handlebars from 'express-handlebars';
-import productRouter from './src/routers/products.router.js';
-import cartRouter from './src/routers/carts.router.js';
+import productRouter from './src/routes/products.router.js';
+import cartRouter from './src/routes/carts.router.js';
 import errorHandler from './middlewares/errorHandler.js';
 
 import path from 'path';
@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const routers = require("routers");
+const routers = require("routes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -49,9 +49,9 @@ app.listen(PORT, () => {
 });
 
 /*
-http://localhost:8080
-
-
+http://localhost:8080/api/products
+http://localhost:8080/api/carts
+http://localhost:8080/api/products/1
 */
 
 

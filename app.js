@@ -16,6 +16,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.engine(
   'handlebars',
@@ -30,17 +31,10 @@ app.engine(
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
-app.get('/', (req, res) => {
-  res.render('app', {
-    name: 'BackEnd01',
-    last_name: '2025'
-  });
-});
-
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 app.use(errorHandler);
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 
 const PORT = process.env.PORT || 8080;

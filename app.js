@@ -40,6 +40,7 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 app.use(errorHandler);
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 const PORT = process.env.PORT || 8080;

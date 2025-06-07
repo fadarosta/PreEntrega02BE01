@@ -1,51 +1,26 @@
-
 import express from 'express';
-import routes from './src/routes/index.js';
-import handlebars from 'express-handlebars';
-import productRouter from './src/routes/products.router.js';
-import cartRouter from './src/routes/carts.router.js';
-import errorHandler from './src/middlewares/errorHandler.js';
-
+import { engine } from 'express-handlebars';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import router from './src/routes/products.routes.js';
 
 const app = express();
+const __dirname = path.resolve();
+const socket = io();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.engine('hbs', engine({
+  extname: '.hbs',
+  defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, 'src/views/layouts'),
+  partialsDir: path.join(__dirname, 'src/views/partials'),
+}));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'src/views'));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.engine(
-  'handlebars',
-  handlebars.engine({
-    extname: '.handlebars',
-    defaultLayout: 'main',
-    layoutsDir: path.join(__dirname, 'views', 'layouts'),
-    partialsDir: path.join(__dirname, 'views', 'partials'),
-  })
-);
-
-app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views'));
-
-app.use('/api/products', productRouter);
-app.use('/api/carts', cartRouter);
-app.use(errorHandler);
-// app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/', router);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
-
-/*
-http://localhost:8080/api/products
-http://localhost:8080/api/carts
-http://localhost:8080/api/products/1
-*/
-
-

@@ -1,2 +1,12 @@
-<h1>{{name}}</h1>
-<h2>{{last_name}}</h2>
+<section class="productos">
+    {{#each products}}
+    <article class="producto">
+        <img src="{{this.thumbnail}}" alt="{{this.title}}">
+        <h2>{{this.title}}</h2>
+        <p>{{this.description}}</p>
+        <p>Precio: ${{this.price}}</p>
+        <p>Código: {{this.code}}</p>
+        <p>Stock: {{this.stock}}</p>
+    </article>
+    {{/each}}
+</section>

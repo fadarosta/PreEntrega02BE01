@@ -1,5 +1,6 @@
 import express from 'express';
 const router = express.Router();
+import { io } from '../../app.js';
 
 const products = [
     {
@@ -30,6 +31,21 @@ const products = [
 
 router.get('/', (req, res) => {
     res.status(200).json(products);
+});
+
+router.post('/products', (req, res) => {
+    const { title, description, price, thumbnail, code, stock } = req.body;
+    const newProduct = { title, description, price, thumbnail, code, stock };
+    products.push(newProduct);
+    io.emit('updateProducts', products);
+    res.redirect('/');
+});
+
+router.post('/products/delete/:code', (req, res) => {
+    const { code } = req.params;
+    products = products.filter(product => product.code !== code);
+    io.emit('updateProducts', products);
+    res.redirect('/');
 });
 
 export default products

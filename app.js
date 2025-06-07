@@ -1,11 +1,11 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 import path from 'path';
-import router from './src/routes/products.routes.js';
+import router from './src/routes/products.router.js';
 
 const app = express();
 const __dirname = path.resolve();
-const socket = io();
+// const socket = io(); 
 
 app.engine('hbs', engine({
   extname: '.hbs',
